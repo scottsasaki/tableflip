@@ -1,51 +1,62 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-  const [max, setMax] = useState({ x: 0, y: 0, z: 0 });
+  // const [max, setMax] = useState({ x: 0, y: 0, z: 0 });
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [z, setZ] = useState(0);
+
   const [thrown, setThrown] = useState(false);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    const acl = new Accelerometer({ frequency: 60 });
-
-    acl.addEventListener("reading", () => {
-      acl.x > max.x && (max.x = acl.x);
-      acl.y > max.y && (max.y = acl.y);
-      acl.z > max.z && (max.z = acl.z);
-    });
-
-    acl.start();
-    return () => {
-      // acl.done();
-    };
-  }, [max]);
-
   function handleResetClick() {
-    setMax({ x: 0, y: 0, z: 0 });
+    setX(0);
+    setY(0);
+    setZ(0);
     setThrown(false);
   }
 
   function handleMockThrow() {
-    setMax({ x: 12, y: 4, z: 10 });
+    setX(Math.random() * 10);
+    setY(Math.random() * 10);
+    setZ(Math.random() * 10);
     setThrown(true);
+  }
+
+  function handleStartSensing() {
+    // eslint-disable-next-line no-undef
+    const acl = new Accelerometer({ frequency: 60 });
+
+    acl.addEventListener("reading", () => {
+      if (acl) {
+        // setMax(acl);
+        setX(acl.x);
+        setY(acl.y);
+        setZ(acl.z);
+        setThrown(true);
+      }
+    });
+
+    acl.start();
   }
 
   return (
     <div className="app-container">
       <header className="header">Tableflip</header>
-      <Controls onResetClick={handleResetClick} onMockThrow={handleMockThrow} />
+      <div className="subheader">Chrome Mobile Only</div>
 
-      <div className="max">{max.x}</div>
-      <div className="max">{max.y}</div>
-      <div className="max">{max.z}</div>
+      <Controls
+        onStart={handleStartSensing}
+        onResetClick={handleResetClick}
+        onMockThrow={handleMockThrow}
+      />
 
-      <div
+      <section
         style={{
           display: "grid",
-          gridTemplateColumns: "20% 90%",
-          margin: "0 auto",
+          gridTemplateColumns: "20% 80%",
+          margin: "10rem auto",
           maxWidth: "500px",
         }}
       >
@@ -56,7 +67,7 @@ function App() {
           <div
             className="x-axis"
             style={{
-              transform: `translateX(${max.x * 10}px)`,
+              transform: `translateX(${x * 10}px)`,
               transition: "all 1s",
               display: "inline-block",
             }}
@@ -65,7 +76,7 @@ function App() {
               className="table"
               style={{
                 display: "inline-block",
-                transform: `rotate(${max.y * 100}deg)`,
+                transform: `rotate(${y * 100}deg)`,
                 transition: "all 1s",
               }}
             >
@@ -74,15 +85,21 @@ function App() {
           </div>
         </div>
         {/* ┳━┳ ┳━┳ ヽ(ಠل͜ಠ)ﾉ (╯°□°)╯︵ ┻━┻ */}
-      </div>
+      </section>
+
+      <section className="debug" style={{ color: "#ccc" }}>
+        <div className="max">{x}</div>
+        <div className="max">{y}</div>
+        <div className="max">{z}</div>
+      </section>
     </div>
   );
 }
 
-function Controls({ handleStart, onResetClick, onMockThrow }) {
+function Controls({ onStart, onResetClick, onMockThrow }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-      {/* <button onClick={handleStart}>Start</button> */}
+      <button onClick={onStart}>Start</button>
 
       <button onClick={onResetClick}>Reset</button>
       <button onClick={onMockThrow}>Throw</button>

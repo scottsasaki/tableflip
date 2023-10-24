@@ -10,7 +10,13 @@
 .header {
   text-align: center;
   font-size: 1.25rem;
-  margin-bottom: 2rem;
+}
+
+.subheader {
+  text-align: center;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  color: #999;
 }
 
 .app-container {
