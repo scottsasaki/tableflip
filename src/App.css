@@ -24,3 +24,36 @@
   /* max-width: 400px;
   margin: 0 auto; */
 }
+
+.shaking {
+  font-weight: bold;
+  animation-name: shaking;
+  animation-iteration-count: infinite;
+  animation-duration: 0.025s;
+}
+
+@keyframes shaking {
+  from {
+    transform: translateX(1px);
+  }
+
+  to {
+    transform: translateX(-2px);
+  }
+}
+
+.button-throw {
+  cursor: pointer;
+  border-radius: 10rem;
+  width: 5rem;
+  height: 5rem;
+  background: brown;
+  border: 5px solid #df9904;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.debug {
+  color: #ccc;
+}
