@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tableflip/static/css/main.f51fb592.css",
-    "main.js": "/tableflip/static/js/main.91014b16.js",
+    "main.js": "/tableflip/static/js/main.a5e07235.js",
     "static/js/787.598c6bcf.chunk.js": "/tableflip/static/js/787.598c6bcf.chunk.js",
     "index.html": "/tableflip/index.html",
     "main.f51fb592.css.map": "/tableflip/static/css/main.f51fb592.css.map",
-    "main.91014b16.js.map": "/tableflip/static/js/main.91014b16.js.map",
+    "main.a5e07235.js.map": "/tableflip/static/js/main.a5e07235.js.map",
     "787.598c6bcf.chunk.js.map": "/tableflip/static/js/787.598c6bcf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f51fb592.css",
-    "static/js/main.91014b16.js"
+    "static/js/main.a5e07235.js"
   ]
 }
