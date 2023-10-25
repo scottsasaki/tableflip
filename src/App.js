@@ -10,6 +10,7 @@ function App() {
 
   const [thrown, setThrown] = useState(false);
   const [preparing, setPreparing] = useState(false);
+  const [sensor, setSensor] = useState(false);
 
   function handleResetClick() {
     setPreparing(false);
@@ -33,28 +34,31 @@ function App() {
   });
 
   useEffect(() => {
-    acl.start();
+    if (sensor) {
+      acl.start();
+    }
 
     return () => {
       acl.stop();
     };
-  }, []);
+  }, [sensor]);
 
   function handleMockThrow() {
     if (thrown) {
       handleResetClick();
-    }
-
-    setTimeout(() => {
+      setTimeout(() => {
+        setPreparing(true);
+      }, 1000);
+    } else {
       setPreparing(true);
-    }, 1000);
+    }
 
     setTimeout(
       () => {
         setPreparing(false);
         setThrown(true);
 
-        setX((Math.random() * 10).toFixed(2));
+        setX((Math.random() * 10 + 2).toFixed(2));
         setY((Math.random() * 10).toFixed(2));
         setZ((Math.random() * 10).toFixed(2));
       },
@@ -62,7 +66,9 @@ function App() {
     );
   }
 
-  const handleStartSensing = () => {};
+  const handleToggleSensing = () => {
+    setSensor(!sensor);
+  };
 
   const face = () => {
     if (thrown) {
@@ -74,12 +80,13 @@ function App() {
   return (
     <div className="app-container">
       <header className="header">Tableflip</header>
-      <div className="subheader">Chrome Mobile Only</div>
+      <div className="subheader">Accelerometer on Chrome Mobile Only</div>
 
       <Controls
-        onStart={handleStartSensing}
+        onStart={handleToggleSensing}
         onResetClick={handleResetClick}
         onMockThrow={handleMockThrow}
+        sensor={sensor}
       />
 
       <section
@@ -129,7 +136,7 @@ function App() {
   );
 }
 
-function Controls({ onStart, onResetClick, onMockThrow }) {
+function Controls({ onStart, onResetClick, onMockThrow, sensor }) {
   return (
     <div
       style={{
@@ -145,7 +152,9 @@ function Controls({ onStart, onResetClick, onMockThrow }) {
       </button>
 
       <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-        <button onClick={onStart}>Start</button>
+        <button onClick={onStart}>
+          {sensor ? "Stop Accelerometer" : "Start Accelerometer"}
+        </button>
 
         <button onClick={onResetClick}>Reset</button>
       </div>
