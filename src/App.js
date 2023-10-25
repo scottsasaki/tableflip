@@ -48,7 +48,7 @@ function App() {
 
   const face = () => {
     if (thrown) {
-      return x > 8 ? "(╯ಠ□ಠ)╯︵" : "(╯°□°)╯︵";
+      return x > 8 ? "(╯ಠДಠ)╯︵" : "(╯°□°)╯︵";
     } else {
       return "(╮°_°)╮";
     }
