@@ -3,7 +3,6 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  // const [max, setMax] = useState({ x: 0, y: 0, z: 0 });
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [z, setZ] = useState(0);
@@ -19,29 +18,6 @@ function App() {
     setZ(0);
     setThrown(false);
   }
-
-  // eslint-disable-next-line no-undef
-  const acl = new Accelerometer({ frequency: 60 });
-
-  acl.addEventListener("reading", () => {
-    if (acl) {
-      // setMax(acl);
-      setX(acl.x);
-      setY(acl.y);
-      setZ(acl.z);
-      setThrown(true);
-    }
-  });
-
-  useEffect(() => {
-    if (sensor) {
-      acl.start();
-    }
-
-    return () => {
-      acl.stop();
-    };
-  }, [sensor]);
 
   function handleMockThrow() {
     if (thrown) {
@@ -80,10 +56,9 @@ function App() {
   return (
     <div className="app-container">
       <header className="header">Tableflip</header>
-      <div className="subheader">Accelerometer on Chrome Mobile Only</div>
+      {/* <div className="subheader">Accelerometer on Chrome Mobile Only</div> */}
 
       <Controls
-        onStart={handleToggleSensing}
         onResetClick={handleResetClick}
         onMockThrow={handleMockThrow}
         sensor={sensor}
@@ -136,7 +111,7 @@ function App() {
   );
 }
 
-function Controls({ onStart, onResetClick, onMockThrow, sensor }) {
+function Controls({ onResetClick, onMockThrow, sensor }) {
   return (
     <div
       style={{
@@ -152,10 +127,6 @@ function Controls({ onStart, onResetClick, onMockThrow, sensor }) {
       </button>
 
       <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-        <button onClick={onStart}>
-          {sensor ? "Stop Accelerometer" : "Start Accelerometer"}
-        </button>
-
         <button onClick={onResetClick}>Reset</button>
       </div>
     </div>
