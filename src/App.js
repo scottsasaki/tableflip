@@ -66,8 +66,7 @@ function App() {
 
       <section
         style={{
-          display: "grid",
-          gridTemplateColumns: "20% 80%",
+          display: "flex",
           margin: "10rem auto",
           maxWidth: "500px",
         }}
@@ -78,7 +77,7 @@ function App() {
         >
           {face()}
         </div>
-        <div className="room">
+        <div className="room" style={{ flexGrow: 1 }}>
           <div
             className="x-axis"
             style={{
