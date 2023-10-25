@@ -1,6 +1,6 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [x, setX] = useState(0);
@@ -42,10 +42,6 @@ function App() {
     );
   }
 
-  const handleToggleSensing = () => {
-    setSensor(!sensor);
-  };
-
   const face = () => {
     if (thrown) {
       return x > 8 ? "(╯ಠДಠ)╯︵" : "(╯°□°)╯︵";
@@ -73,7 +69,7 @@ function App() {
       >
         <div
           className={`character ${preparing ? "shaking" : ""}`}
-          style={{ textAlign: "right" }}
+          style={{ textAlign: "right", paddingLeft: ".5rem" }}
         >
           {face()}
         </div>
@@ -126,7 +122,9 @@ function Controls({ onResetClick, onMockThrow, sensor }) {
       </button>
 
       <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-        <button onClick={onResetClick}>Reset</button>
+        <button onClick={onResetClick} className="button-reset">
+          Reset
+        </button>
       </div>
     </div>
   );

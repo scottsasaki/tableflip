@@ -55,6 +55,19 @@
   font-weight: 600;
 }
 
+.button-reset {
+  cursor: pointer;
+  border-radius: 10rem;
+  width: 4rem;
+  height: 2rem;
+  background: #fcfcfc;
+  border: 1px solid #eee;
+  color: white;
+  text-transform: uppercase;
+  color: #555;
+  font-size: 0.75rem;
+}
+
 .debug {
   color: #ccc;
 }
